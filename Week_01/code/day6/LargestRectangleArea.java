@@ -63,14 +63,14 @@ public class LargestRectangleArea {
     public static int largestRectangleArea3(int[] heights) {
         int maxArea = 0;
         int[] newHeight = new int[heights.length + 2];
-        for (int i = 1; i < heights.length; i++) {
+        for (int i = 1; i < heights.length + 1; i++) {
             newHeight[i] = heights[i -1];
         }
         Deque<Integer> stack = new ArrayDeque();
         for (int i = 0; i < newHeight.length; i++) {
             while (!stack.isEmpty() && newHeight[i] < newHeight[stack.peek()]){
                 int heightIndex = stack.pop();
-                maxArea = Math.max(maxArea,(i - heightIndex - 1) * heights[heightIndex]);
+                maxArea = Math.max(maxArea,(i - stack.peek() - 1) * newHeight[heightIndex]);
             }
             stack.push(i);
         }
