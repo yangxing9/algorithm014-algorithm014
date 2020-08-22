@@ -49,6 +49,8 @@ public class InorderTraversal {
             }
             cur = deque.pop();
             list.add(cur.val);
+            //为了解决 右节点的遍历，当cur为左节点时，无意义，跳过
+            // 当cur为中节点时，发挥作用
             cur = cur.right;
         }
         return list;
