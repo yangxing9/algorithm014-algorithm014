@@ -24,7 +24,7 @@ public class GetLeastNumbers2 {
                 queue.add(arr[i]);
             }
         }
-        return queue.stream().mapToInt(Integer::intValue).toArray();
+        return queue.stream().mapToInt(a->a).toArray();
     }
 
 }
