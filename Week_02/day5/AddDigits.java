@@ -51,6 +51,13 @@ public class AddDigits {
         return num;
     }
 
+    public static int addDigits4(int num){
+        if(num < 10) return num;
+        int a = num % 10;
+        int b = num / 10;
+        return addDigits4(a+b);
+    }
+
     /**
      * 在数学中，数根(又称位数根或数字根Digital root)是自然数的一种性质，换句话说，每个自然数都有一个数根。
      *
