@@ -26,7 +26,7 @@ public class ReverseList {
         b.next = c;
         c.next = d;
         d.next = e;
-        ListNode result = reverseList2(a);
+        ListNode result = reverseList(a);
         System.out.println(result);
     }
 
@@ -35,16 +35,16 @@ public class ReverseList {
      * 时间复杂度：O（n）
      * 空间复杂度：O（n），由于使用递归，会使用隐式栈空间
      *
-     * 分析：递归的方式，就是到达最后，然后反转，本题中不要纠结返回值，实际上返回任何元素都可以，不影响的
+     * 分析：递归的方式，就是到达最后，然后反转
      *      关键点在于怎么将后一个元素指向自己，自己的下一个再指向前一个
      */
-    public ListNode reverseList(ListNode head) {
+    public static ListNode reverseList(ListNode head) {
         // 递归结束，开始反转
         if (head == null || head.next == null) {
-            return null;
+            return head;
         }
         // 不需要关心返回值怎么用，这里递归只是为了到达最后，然后反转
-        reverseList(head.next);
+        ListNode p = reverseList(head.next);
         // 最后一个元素直接return后，此时 head 为倒数第二个元素
         // 核心在这，head.next.next 意思就是 倒数第二个元素的 下一个元素head.next（即最后一个元素） 要开始反转了，
         // 怎么反转呢？就是让他的下一个为当前元素,即 head.next.next = head
@@ -53,8 +53,7 @@ public class ReverseList {
         // 那么为什么还要将其置为null呢？因为我们的头结点 最后要变成 尾结点，尾结点的next为null，所以干脆直接全部先置为null，非第一个元素还会再改变,
         // 如果这里不写，注释掉，那么最终会形成 4 -> 3 -> 2 -> 1 -> 2 -> 3 -> 4 的环，就是因为没有将 1 的next置为null导致的
         head.next = null;
-        // 根本就不需要返回
-        return null;
+        return p;
     }
 
     /**
