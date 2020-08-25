@@ -11,7 +11,17 @@
  */
 public class MaxDepth {
     public static void main(String[] args) {
-
+        TreeNode root = new TreeNode(3);
+        TreeNode left1 = new TreeNode(9);
+        TreeNode right1 = new TreeNode(20);
+        TreeNode left2 = new TreeNode(15);
+        TreeNode right2 = new TreeNode(7);
+        right1.left = left2;
+        right1.right = right2;
+        root.left = left1;
+        root.right = right1;
+        int result = maxDepth2(root);
+        System.out.println(result);
     }
 
     public static int maxDepth(TreeNode root) {
@@ -30,10 +40,10 @@ public class MaxDepth {
         return Math.max(left,right);
     }
 
-    public int maxDepth2(TreeNode root) {
+    public static int maxDepth2(TreeNode root) {
         if (root == null) return 0;
-        int left = maxDepth(root.left);
-        int right = maxDepth(root.right);
+        int left = maxDepth2(root.left);
+        int right = maxDepth2(root.right);
         return Math.max(left,right) + 1;
     }
 }
