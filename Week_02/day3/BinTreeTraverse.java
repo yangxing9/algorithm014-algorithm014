@@ -91,6 +91,7 @@ public class BinTreeTraverse {
 class ListNode{
     ListNode left;
     ListNode right;
+    ListNode next;
     int val;
     ListNode(int val){
         this.val = val;
