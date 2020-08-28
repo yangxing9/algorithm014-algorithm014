@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,7 +26,61 @@ import java.util.List;
  */
 public class FourSum {
 
-    public List<List<Integer>> fourSum(int[] nums, int target) {
+    public static void main(String[] args) {
+        FourSum demo = new FourSum();
+        System.out.println(demo.fourSum(new int[]{1, 0, -1, 0, -2, 2},0));
+    }
 
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums == null || nums.length < 4) return result;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int min = nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3];
+            if (min > target) break;
+            int max = nums[i] + nums[nums.length - 1] + nums[nums.length - 2] + nums[nums.length - 3];
+            if (max < target) continue;
+            for (int j = i + 1; j < nums.length - 2; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+                int k = j + 1;
+                int h = nums.length - 1;
+                int min2 = nums[i] + nums[j] + nums[k] + nums[k + 1];
+                if (min2 > target) break;
+                int max2 = nums[i] + nums[j] + nums[nums.length - 1] + nums[nums.length - 2];
+                if (max2 < target) continue;
+                while (k < h){
+                    int cur = nums[i] + nums[j] + nums[k] + nums[h];
+                    if (cur == target){
+                        result.add(new ArrayList<>(Arrays.asList(nums[i],nums[j],nums[k],nums[h])));
+                        while (k < h && nums[k] == nums[++k]);
+                        while (k < h && nums[h] == nums[--h]);
+                    }else if (cur < target){
+                        while (k < h && nums[k] == nums[++k]);
+                    }else {
+                        while (k < h && nums[h] == nums[--h]);
+                    }
+                }
+            }
+        }
+        return result;
+//        return doFourSum(new ArrayList<List<Integer>>(),nums,0,target,new ArrayList<>(),0);
+    }
+
+    private List<List<Integer>> doFourSum(ArrayList<List<Integer>> result, int[] nums,int sum, int target, ArrayList<Integer> list,int index) {
+        if (list.size() == 4 && target == sum){
+            result.add(new ArrayList<>(list));
+            return result;
+        }
+        for (int i = index; i < nums.length; i++) {
+            if (sum > target) break;
+            if(i > index && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            list.add(nums[i]);
+            doFourSum(result,nums,sum + nums[i],target,list,i + 1);
+            list.remove(list.size() - 1);
+        }
+        return result;
     }
 }
