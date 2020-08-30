@@ -113,9 +113,91 @@ function f(x) {
 
 执行深度优先遍历，从较深层的结点返回到较浅层结点的时候，需要做「状态重置」，即「回到过去」、「恢复现场」
 
-## 回溯经典题目，排列组合
+## 回溯经典题目，排列，组合，子集
 ### 什么时候使用 used 数组，什么时候使用 begin 变量
 简单总结一下：
 
 - 排列问题，讲究顺序（即 [2, 2, 3] 与 [2, 3, 2] 视为不同列表时），需要记录哪些数字已经使用过，此时用 used 数组；
 - 组合问题，不讲究顺序（即 [2, 2, 3] 与 [2, 3, 2] 视为相同列表时），需要按照某种顺序搜索，此时使用 begin 变量。
+- 子集问题，当前层可选可不远，算是组合问题，从当前层选择空，或者选择当前层数字即可
+
+## 分治思想
+
+和递归差不多，区别是需要处理当前层逻辑后，需要归并分治的结果
+
+## 八皇后问题
+
+看似挺难的一道题，分解后也不是很难
+
+首先分析题目，横，竖，左斜，右斜都不能遇到Q，其实就是当前列表能放的需要判断是否合法
+1. 递归终结者
+    
+    - 到达第n层就结束
+2. 处理当前层
+    
+    - 从0-n循环列
+    - 判断当前行列是否合法，不合法跳过当前层
+    - 将当前行列置为Q
+3. 进入下一层
+4. 不要忘记将当前行列置为 . 清除状态
+
+> 判断是否合法：
+>1. 先判断上方是否有Q
+>2. 判断左上方是否有Q
+>3. 判断右上方是否有Q
+    
+实现逻辑如下：
+```java
+public List<List<String>> solveNQueens(int n) {
+        List<List<String>> result = new ArrayList<>();
+        if (n <= 0) return result;
+        ArrayList<String> list = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; ++i) sb.append('.');
+        for (int i = 0; i < n; ++i) list.add(sb.toString());
+        return doSolveNQueens(n,result,list,0);
+    }
+
+    private List<List<String>> doSolveNQueens(int n, List<List<String>> result, ArrayList<String> list, int row) {
+        if (row == n){
+            result.add(new ArrayList<>(list));
+            return result;
+        }
+        for (int col = 0; col < n; col++) {
+            // 因为每次添加完Q后，直接进入下一层，所以同层只有一个Q
+            if (!isValidQueens(row,list,col,n)) continue;
+            // 将当前行列置为Q
+            setChar(row,col,'Q',list);
+            // 到下一行
+            doSolveNQueens(n,result,list,row + 1);
+            // 清理当前层状态，改成 .
+            setChar(row,col,'.',list);
+        }
+        return result;
+    }
+
+    private boolean isValidQueens(int row, ArrayList<String> list, int col,int n) {
+        // 判断上方是否有Q
+        for (int i = 0; i < row; ++i) {
+            if (list.get(i).charAt(col) == 'Q')
+                return false;
+        }
+        // 判断左上方是否有Q
+        for (int i = row - 1,j = col - 1;i >= 0 && j >= 0;--i,--j) {
+            if (list.get(i).charAt(j) == 'Q')
+                return false;
+        }
+        // 判断右上方是否有Q
+        for (int i = row - 1,j = col + 1;i >= 0 && j < n; --i,++j) {
+            if (list.get(i).charAt(j) == 'Q')
+                return false;
+        }
+        return true;
+    }
+
+    private void setChar(int row, int col, char c,ArrayList<String> list) {
+        StringBuilder sb = new StringBuilder(list.get(row));
+        sb.setCharAt(col, c);
+        list.set(row, sb.toString());
+    }
+```
