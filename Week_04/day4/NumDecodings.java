@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author yangxing
@@ -28,7 +27,7 @@ import java.util.Map;
 public class NumDecodings {
 
     public static void main(String[] args) {
-        NumDecodings demo = new NumDecodings();
+        NumDecodings2 demo = new NumDecodings2();
         int res = demo.numDecodings("226");
         System.out.println(res);
     }

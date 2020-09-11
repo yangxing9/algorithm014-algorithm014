@@ -1,5 +1,3 @@
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -27,7 +25,7 @@ import java.util.Stack;
 public class Combine {
 
     public static void main(String[] args) {
-        Combine demo = new Combine();
+        Combine2 demo = new Combine2();
         List<List<Integer>> result = demo.combine(6,3);
         System.out.println(result);
     }
