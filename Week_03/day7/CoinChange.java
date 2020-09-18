@@ -21,7 +21,7 @@
 public class CoinChange {
 
     public static void main(String[] args) {
-        CoinChange2 demo = new CoinChange2();
+        CoinChange3 demo = new CoinChange3();
         int result = demo.coinChange(new int[]{1, 2, 5},11);
         System.out.println(result);
     }

@@ -53,7 +53,7 @@ public class IsBalanced {
         n2.right = n33;
         n3.left = n4;
         n3.right = n44;
-        System.out.println(new IsBalanced().isBalanced(root));
+        System.out.println(new IsBalanced2().isBalanced(root));
     }
 
     public boolean isBalanced(TreeNode root) {
