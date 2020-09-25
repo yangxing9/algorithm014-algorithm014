@@ -41,7 +41,7 @@ import java.util.*;
 public class LadderLength {
 
     public static void main(String[] args) {
-        LadderLength demo = new LadderLength();
+        LadderLength3 demo = new LadderLength3();
         List<String> wordList = new ArrayList<>(Arrays.asList("hot","dot","dog","lot","log","cog"));
         int result = demo.ladderLength("hit","cog",wordList);
         System.out.println(result);
