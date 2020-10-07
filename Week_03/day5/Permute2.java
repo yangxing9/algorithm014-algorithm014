@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class Permute2 {
     public static void main(String[] args) {
-        Permute3 demo = new Permute3();
+        Permute demo = new Permute();
         int[] nums = new int[]{1,2,3};
         System.out.println(demo.permute(nums));
     }
