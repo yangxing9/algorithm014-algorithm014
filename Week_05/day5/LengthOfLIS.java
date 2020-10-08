@@ -27,7 +27,7 @@ import java.util.Arrays;
 public class LengthOfLIS {
 
     public static void main(String[] args) {
-        System.out.println(new LengthOfLIS().lengthOfLIS(new int[]{1,3,6,7,9,4,10,5,6}));
+        System.out.println(new LengthOfLIS().lengthOfLIS(new int[]{1,2,3,4,5,1,10}));
     }
 
     public int lengthOfLIS(int[] nums) {
