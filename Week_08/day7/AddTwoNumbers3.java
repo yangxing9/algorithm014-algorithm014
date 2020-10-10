@@ -13,7 +13,7 @@
  * 原因：342 + 465 = 807
  * 通过次数579,609提交次数1,505,073
  */
-public class AddTwoNumbers2 {
+public class AddTwoNumbers3 {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(-1);
