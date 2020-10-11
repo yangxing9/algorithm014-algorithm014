@@ -18,7 +18,7 @@
 public class AddTwoNumbers {
 
     public static void main(String[] args) {
-        AddTwoNumbers3 demo = new AddTwoNumbers3();
+        AddTwoNumbers demo = new AddTwoNumbers();
         ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(9);
         ListNode l3 = new ListNode(9);
