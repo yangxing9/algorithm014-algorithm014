@@ -88,7 +88,7 @@ public class BinTreeTraverse {
 
 }
 
-class ListNode{
+class ListNode {
     ListNode left;
     ListNode right;
     ListNode next;
