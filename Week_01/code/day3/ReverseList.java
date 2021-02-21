@@ -26,8 +26,30 @@ public class ReverseList {
         b.next = c;
         c.next = d;
         d.next = e;
-        ListNode result = reverseList(a);
+        ListNode result = reverseList6(a);
         System.out.println(result);
+    }
+
+    public static ListNode reverseList5(ListNode head) {
+        // 递归终止条件
+        if (head == null || head.next == null) return head;
+        // 处理当前层
+        ListNode p = reverseList5(head.next);
+        head.next.next = head;
+        head.next = null;
+        return p;
+    }
+
+    public static ListNode reverseList6(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null){
+            ListNode tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+        }
+        return pre;
     }
 
     /**
@@ -40,10 +62,8 @@ public class ReverseList {
      */
     public static ListNode reverseList(ListNode head) {
         // 递归结束，开始反转
-        if (head == null || head.next == null) {
-            return head;
-        }
-        // 不需要关心返回值怎么用，这里递归只是为了到达最后，然后反转
+        if (head == null || head.next == null) return head;
+        // 递归到达最后，然后反转
         ListNode p = reverseList(head.next);
         // 最后一个元素直接return后，此时 head 为倒数第二个元素
         // 核心在这，head.next.next 意思就是 倒数第二个元素的 下一个元素head.next（即最后一个元素） 要开始反转了，

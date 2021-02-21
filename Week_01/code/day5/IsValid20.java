@@ -1,9 +1,6 @@
 package day5;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author yangxing
@@ -44,6 +41,25 @@ public class IsValid20 {
     public static void main(String[] args) {
         String s = "{}{}[](";
         System.out.println(isValid1(s));
+    }
+
+
+    public static boolean isValid2(String s) {
+        if (s.length() == 0) return true;
+        if (s.length() % 2 != 0) return false;
+        Deque<Character> deque = new ArrayDeque();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '('){
+                deque.push(')');
+            } else if (s.charAt(i) == '['){
+                deque.push(']');
+            } else if (s.charAt(i) == '{'){
+                deque.push('}');
+            }else {
+                if (deque.isEmpty() || deque.pop() != s.charAt(i)) return false;
+            }
+        }
+        return deque.isEmpty();
     }
 
     /**

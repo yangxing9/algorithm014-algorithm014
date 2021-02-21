@@ -26,9 +26,10 @@ public class SwapPairs {
         b.next = c;
         c.next = d;
         d.next = e;
-        ListNode result = swapPairs2(a);
+        ListNode result = swapPairs(a);
         System.out.println(result.val);
     }
+
 
     /**
      * 递归写法：思路，因为要反转连续两个元素，所以递归传入下一次肯定是 当前元素的下一个的下一个，

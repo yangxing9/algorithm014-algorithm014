@@ -39,7 +39,7 @@ public class MaxDepth3 {
         n2.right = n33;
         n3.left = n4;
         n3.right = n44;
-        System.out.println(new MaxDepth3().maxDepth(root));
+        System.out.println(new MaxDepth4().maxDepth(root));
     }
 
     public int maxDepth(TreeNode root) {

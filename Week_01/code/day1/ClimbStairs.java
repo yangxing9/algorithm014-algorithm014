@@ -1,5 +1,8 @@
 package day1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author yangxing
  * @date 2020-8-10
@@ -24,10 +27,50 @@ package day1;
  */
 public class ClimbStairs {
     public static void main(String[] args) {
-        System.out.println(climbStairs2(1));
-        System.out.println(climbStairs2(2));
-        System.out.println(climbStairs2(3));
-        System.out.println(climbStairs2(4));
+        System.out.println(climbStairs6(1));
+        System.out.println(climbStairs6(2));
+        System.out.println(climbStairs6(3));
+        System.out.println(climbStairs6(4));
+    }
+
+    public static int climbStairs3(int n) {
+        if (n <= 2) return n;
+        return climbStairs3(n - 1) + climbStairs3(n - 2);
+    }
+
+    public static int climbStairs4(int n) {
+        if(n <= 2) return n;
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        for (int i = 2; i < n; i++) {
+            list.add(list.get(i - 1) + list.get(i - 2));
+        }
+        return list.get(n - 1);
+    }
+
+    public static int climbStairs5(int n) {
+        if(n <= 2) return n;
+        int[] arr = new int[n];
+        arr[0] = 1;
+        arr[1] = 2;
+        for (int i = 2; i < n; i++) {
+            arr[i] = arr[i - 1] + arr[i - 2];
+        }
+        return arr[n - 1];
+    }
+
+    public static int climbStairs6(int n) {
+        if(n <= 2) return n;
+        int first = 1;
+        int second = 2;
+        int res = 0;
+        for (int i = 2; i < n; i++) {
+            res = first + second;
+            first = second;
+            second = res;
+        }
+        return res;
     }
 
     /**

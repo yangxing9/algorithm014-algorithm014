@@ -71,6 +71,28 @@ public class MergeKLists {
         return dummy.next;
     }
 
+    public ReviewNode mergeKLists5(ReviewNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        ReviewNode node = lists[0];
+        for (int i = 1; i < lists.length; i++) {
+            node = mergeTwoLists(node,lists[i]);
+        }
+        return node;
+    }
+
+    public ReviewNode mergeKLists6(ReviewNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        return  _merge(lists,0,lists.length - 1);
+    }
+
+    private ReviewNode _merge(ReviewNode[] lists, int start, int end) {
+        if (start >= end) return lists[start];
+        int mid = (end - start) / 2 + start;
+        ReviewNode left = _merge(lists,start,mid);
+        ReviewNode right = _merge(lists,mid + 1,end);
+        return mergeTwoLists(left,right);
+    }
+
     /**
      * 思路：较为简单，循环，合并后的一直和 第 i 个合并
      */
@@ -119,9 +141,7 @@ public class MergeKLists {
      * 最小堆实现
      */
     public ReviewNode mergeKLists4(ReviewNode[] lists) {
-        if(lists==null || lists.length==0) {
-            return null;
-        }
+        if(lists==null || lists.length==0) return null;
         PriorityQueue<ReviewNode> queue = new PriorityQueue<>((a,b) -> a.val - b.val);
         ReviewNode dummy  = new ReviewNode(-1);
         ReviewNode pre = dummy;
@@ -134,9 +154,7 @@ public class MergeKLists {
             ReviewNode cur = queue.poll();
             pre.next = cur;
             pre = cur;
-            if (cur.next != null){
-                queue.offer(cur.next);
-            }
+            if (cur.next != null) queue.offer(cur.next);
         }
         return dummy.next;
     }

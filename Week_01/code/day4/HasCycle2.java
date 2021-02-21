@@ -34,9 +34,7 @@ public class HasCycle2 {
     public static ListNode detectCycle(ListNode head) {
         Map<ListNode,ListNode> cache = new HashMap();
         while (head != null){
-            if (cache.containsKey(head)){
-                return cache.get(head);
-            }
+            if (cache.containsKey(head)) return cache.get(head);
             cache.put(head,head);
             head = head.next;
         }
